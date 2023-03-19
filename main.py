@@ -29,6 +29,8 @@ if "busd" not in ss:
     ss.busd =0
 if "busd" not in ss:
     ss.squa =0
+if "mostrar" not in ss:
+    ss.mostrar =False
 # ---------------------Side bar---------------------------------
 st.sidebar.title("Proyecciones de rentabilidad")
 ss.squa = st.sidebar.number_input("**SQUA disponible**", min_value=0)
@@ -38,6 +40,10 @@ st.sidebar.metric(label="**Valor SQMaker**", value="3.5$")
 bt= st.sidebar.button("Calcular proyección", type="primary")
 # --------------------- Variables estáticas ------------------------------
 
+st.title("**Descargo de responsabilidad**")
+st.write("""**¡ATENCION!**
+
+La información presentada NO representa ninguna proyección real y solamente se utiliza con fines especulativos y descriptivos para facilitar el proceso de calculo de ganancias al usuario. Estaremos actualizando en tiempo real el comportamiento del precio del SKER una vez se encuentre disponible.""")
 #Valor de SQMaker
 sqm= 3.5
 if bt:
@@ -120,15 +126,19 @@ if bt:
     else:
         df_acumulado.drop(columns="4%_optimo", inplace=True)
 
-    df_acumulado.drop(columns=["0.01%", "0.05%", "0.1%"], inplace=True)
+    #df_acumulado.drop(columns=["0.01%", "0.05%", "0.1%"], inplace=True)
 
     #Se convierte de wide a long
     df_acumulado = pd.melt(df_acumulado, id_vars=['semanas', 'SQM value'], var_name="pct_emision")
 
     #---------------------- Gráficos -------------------------------------------------
+    fig = px.line(df_acumulado, x="semanas", y="value", color="pct_emision",
+                title='Ganancia acumulada',
+                labels={
+        "semanas":"Semana", "value":"Valor acumulado ($)", "pct_emision":"Porcentaje de emisión"
+                })
+    st.plotly_chart(fig, use_container_width=False)
+    #st.
     fig = px.line(df, x="semanas", y="SQM value", title='Proyeccion valor SQM')
     st.plotly_chart(fig, use_container_width=True)
 
-    fig = px.line(df_acumulado, x="semanas", y="value", color="pct_emision",
-                title='Ganancia acumulada')
-    st.plotly_chart(fig, use_container_width=False)
