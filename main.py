@@ -126,7 +126,7 @@ if bt:
     else:
         df_acumulado.drop(columns="4%_optimo", inplace=True)
 
-    st.write(df_acumulado.columns)
+    #st.write(df_acumulado.columns)
     #df_acumulado.drop(columns=["0.01%", "0.05%", "0.1%"], inplace=True)
 
     #Se convierte de wide a long
