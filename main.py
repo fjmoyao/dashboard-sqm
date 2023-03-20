@@ -109,14 +109,14 @@ if bt:
     df_acumulado = pd.concat([df.iloc[:,[0,1]], df.iloc[:,2:].cumsum()], axis=1)
 
     #corta la ganancia acumulada al alcanzar el 100% de rentabilidad
-    if df.shape[1] > 10:
+    if "4%" in df_acumulado.columns:
         ind = df_acumulado[df_acumulado.loc[:,"semanas"] =="w26"].index[0]
         df_acumulado.loc[ind:,"4%"] = df_acumulado.loc[ind-1,"4%"]
 
-    if df.shape[1] > 9:
+    if "3%" in df_acumulado.columns:
         ind = df_acumulado[df_acumulado.loc[:,"semanas"] =="w34"].index[0]
         df_acumulado.loc[ind:,"3%"] = df_acumulado.loc[ind-1,"3%"]
-    if df.shape[1] > 8:
+    if "2%" in df_acumulado.columns:
         ind = df_acumulado[df_acumulado.loc[:,"semanas"] =="w51"].index[0]
         df_acumulado.loc[ind:,"2%"] = df_acumulado.loc[ind-1,"2%"]
 
@@ -126,6 +126,7 @@ if bt:
     else:
         df_acumulado.drop(columns="4%_optimo", inplace=True)
 
+    st.write(df_acumulado.columns)
     #df_acumulado.drop(columns=["0.01%", "0.05%", "0.1%"], inplace=True)
 
     #Se convierte de wide a long
