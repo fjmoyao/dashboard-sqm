@@ -54,10 +54,10 @@ if bt:
         "2%": np.round(ss.busd*0.3,2),
         "1%": np.round(ss.busd*0.2,2),
         "0.5%": np.round(ss.busd*0.1),
-        "0.25%": np.round(ss.busd*0.05,2),
-        "0.1%": np.round(ss.busd*0.025,2),
-        "0.05%": np.round(ss.busd*0.015,2),
-        "0.01%": np.round(ss.busd*0.0025,2),
+        #"0.25%": np.round(ss.busd*0.05,2),
+        #"0.1%": np.round(ss.busd*0.025,2),
+        #"0.05%": np.round(ss.busd*0.015,2),
+        #"0.01%": np.round(ss.busd*0.0025,2),
     }
     emision =pd.DataFrame(data= emision,
                         index=[0]).T.reset_index()
