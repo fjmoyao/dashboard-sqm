@@ -16,11 +16,11 @@ def proyeccion(valor):
     valores = [valor]
     v = valor
     np.random.seed(31)
-    while count <52:
+    while count <36:
         if count < 8:
-            v = v +  v - v*0.25*np.random.rand(1)[0]
+            v =   1.5*v - v*0.25*np.random.rand(1)[0]
         else:
-            v = v + v*0.06*np.random.rand(1)[0] - v*0.08*np.random.rand(1)[0]
+            v = v + v*0.08*np.random.rand(1)[0] - v*0.08*np.random.rand(1)[0]
         valores.append(np.round(v))
         count+=1
     return valores
@@ -90,7 +90,7 @@ if bt:
 
 
     sqm_proyeccion = proyeccion(sqm)
-    semanas = ["w" + str(x) for x in range(1,53)]
+    semanas = ["w" + str(x) for x in range(1,37)]
 
     df = pd.DataFrame()
     df["semanas"] = semanas
